@@ -10,6 +10,7 @@
 	Github: https://github.com/V0idException/EzScript-Roblox
 	Twitter: https://twitter.com/ExceptionVoid
 	Discord: Unseen#7064
+	Devforum: https://devforum.roblox.com/u/voidexception
 	
 	--
 	
