@@ -35,4 +35,13 @@ Depending on how you have your studio laid out, if you'd like the plugin to look
 
 ![image](https://user-images.githubusercontent.com/70583179/126091290-35fbef30-9c7f-4fb4-b9e8-b6021a36d4a3.png)
 
+FOR SUGGESTIONS:
+
+If you would like to suggest a feature, please make a new issue and I will tag it as a suggestion. If you do not have a github account,
+you can contact me through the following:
+
+Discord: Unseen#7064
+Devforum: https://devforum.roblox.com/u/voidexception
+Twitter: https://twitter.com/ExceptionVoid
+
 Hope you enjoy my plugin! Please credit me for using my code, if you are to use it, thanks! :)
