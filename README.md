@@ -25,6 +25,8 @@ Then, select what kind of script you want, a Local Script or a Script.
 
 Once all that is done, click "Create", a new script will be created with all the details you need
 
+[IF YOU SEE A PROMPT ASKING FOR SCRIPT INJECTION, THAT IS YOUR SCRIPT BEING MADE, ALL THE PLUGIN CODE IS ABOVE]
+
 ![image](https://user-images.githubusercontent.com/70583179/126091222-9f13a2de-dc77-4d5b-8508-4e54a97d69e2.png)
 
 DEVELOPER SUGGESTION:
