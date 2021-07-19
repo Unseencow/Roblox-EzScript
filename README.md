@@ -29,6 +29,11 @@ Once all that is done, click "Create", a new script will be created with all the
 
 ![image](https://user-images.githubusercontent.com/70583179/126091222-9f13a2de-dc77-4d5b-8508-4e54a97d69e2.png)
 
+Videos of the plugin in action:
+
+https://gyazo.com/46bd530560702761e784abd0f91ca836
+https://gyazo.com/1aef9e630e3b4b38b3f061888f80d496
+
 DEVELOPER SUGGESTION:
 
 Depending on how you have your studio laid out, if you'd like the plugin to look the best, I'd suggest having a similar setup to what I have currently:
