@@ -18,17 +18,39 @@
 	Please request any features via github (if you can't, then feel free to message me on discord)
 ]]--
 
---// Variables \\--
-
-	--// Plugin Setup \\-- 
+--// Plugin Setup \\-- 
 
 local newToolBar = plugin:CreateToolbar("EzScript")
+local Selection = game:GetService("Selection")
 local newScriptButton = newToolBar:CreateButton("Open Menu", "", "rbxassetid://4458901886")
-local pluginGui = script.EzScriptUI:Clone() 
+local pluginGui = script.Parent.EzScriptUI:Clone() 
+
+local Selection = game:GetService("Selection")
+
+local formats = {
+Symbols = [[
+-- @: %s
+-- #: %s
+-- !: %s
+					
+--// Variables \\--
+					
+--// Code \\--
+]],
+Text = [[
+-- Author: %s
+-- Date: %s
+-- Purpose: 5s
+			
+--// Variables \\--
+			
+--// Code \\--
+]]
+}
 
 newScriptButton.ClickableWhenViewportHidden = true
 
-	--// Plugin Variables \\--
+--// Plugin Variables \\--
 
 local settingsDebounce = false
 local clickDebounce = false
@@ -41,8 +63,8 @@ local newPluginUI = plugin:CreateDockWidgetPluginGui("Create New", DockWidgetPlu
 	250, 250    
 ))
 
-for _, v in pairs(pluginGui:GetChildren()) do
-	v.Parent = newPluginUI
+for _, element in pairs(pluginGui:GetChildren()) do
+	element.Parent = newPluginUI
 end
 
 newScriptButton.Click:Connect(function()
@@ -52,32 +74,38 @@ end)
 newPluginUI.Holder.Inputs.Create.MouseButton1Click:Connect(function()
 	local authorText = newPluginUI.Holder.Inputs.Author_TextInput.Text
 	local purposeText = newPluginUI.Holder.Inputs.Purpose_TextInput.Text
+	local ToggleSymbols = newPluginUI.Holder.Settings.Toggle_Symbols.Tick.Visible
+	local UseLocalScripts = newPluginUI.Holder.Inputs.LocalScript.Check_LocalScript.Visible
+	
 	local currentDate = os.date("%x")
-	if newPluginUI.Holder.Inputs.LocalScript.Check_LocalScript.Visible == true then 
-		local newLocalScript = Instance.new("LocalScript")
-		newLocalScript.Parent = game.Selection:Get()[1]
-		if newPluginUI.Holder.Settings.Toggle_Symbols.Tick.Visible == true then 
-			newLocalScript.Source = "--[[ \n \n	@: " .. authorText .. "\n	#: " .. currentDate ..  "\n	!: " .. purposeText .. "\n \n]]-- \n \n \n--// Variables \\-- \n \n \n--// Code \\--"
+	
+	local function FormatSource(Script)
+		if ToggleSymbols then 
+			Script.Source = string.format(formats.Symbols,authorText,currentDate,purposeText)
 		else
-			newLocalScript.Source =  "--[[ \n \n	Author: " .. authorText .. "\n	Date: " .. currentDate ..  "\n	Purpose: " .. purposeText .. "\n \n]]-- \n \n \n--// Variables \\-- \n \n \n--// Code \\--"
-		end		
-	elseif newPluginUI.Holder.Inputs.Script.Check_Script.Visible == true then
-		local newScript = Instance.new("Script")
-		newScript.Parent = game.Selection:Get()[1]
-		if newPluginUI.Holder.Settings.Toggle_Symbols.Tick.Visible == true then 
-			newScript.Source = "--[[ \n \n	@: " .. authorText .. "\n	#: " .. currentDate ..  "\n	!: " .. purposeText .. "\n \n]]-- \n \n \n--// Variables \\-- \n \n \n--// Code \\--"
-		else
-			newScript.Source =  "--[[ \n \n	Author: " .. authorText .. "\n	Date: " .. currentDate ..  "\n	Purpose: " .. purposeText .. "\n \n]]-- \n \n \n--// Variables \\-- \n \n \n--// Code \\--"
-		end	
+			Script.Source =  string.format(formats.Text,authorText,currentDate,purposeText)
+		end
 	end
+	
+	local Script = nil
+	
+	if UseLocalScripts then 
+		Script = Instance.new("LocalScript")
+	else 
+		Script = Instance.new("Script")
+	end
+	
+	Script.Parent = Selection:Get()[1]
+	FormatSource(Script)
+	plugin:OpenScript(Script,1)
 end)
 
-newPluginUI.Holder.Inputs.LocalScript.MouseButton1Click:Connect(function()
+newPluginUI.Holder.Inputs.LocalScript.Activated:Connect(function()
 	newPluginUI.Holder.Inputs.Script.Check_Script.Visible = false
 	newPluginUI.Holder.Inputs.LocalScript.Check_LocalScript.Visible = true
 end)
 
-newPluginUI.Holder.Inputs.Settings.MouseButton1Click:Connect(function()
+newPluginUI.Holder.Inputs.Settings.Activated:Connect(function()
 	if settingsDebounce == false then 
 		settingsDebounce = true
 		newPluginUI.Holder.Settings.Visible = true
@@ -87,7 +115,7 @@ newPluginUI.Holder.Inputs.Settings.MouseButton1Click:Connect(function()
 	end
 end)
 
-newPluginUI.Holder.Settings.Toggle_Symbols.MouseButton1Click:Connect(function()
+newPluginUI.Holder.Settings.Toggle_Symbols.Activated:Connect(function()
 	if clickDebounce == false then 
 		clickDebounce = true
 		newPluginUI.Holder.Settings.Toggle_Symbols.Tick.Visible = true
@@ -97,7 +125,7 @@ newPluginUI.Holder.Settings.Toggle_Symbols.MouseButton1Click:Connect(function()
 	end
 end)
 
-newPluginUI.Holder.Inputs.Script.MouseButton1Click:Connect(function()
+newPluginUI.Holder.Inputs.Script.Activated:Connect(function()
 	newPluginUI.Holder.Inputs.Script.Check_Script.Visible = true
 	newPluginUI.Holder.Inputs.LocalScript.Check_LocalScript.Visible = false
 end)
