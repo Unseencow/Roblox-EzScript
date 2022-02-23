@@ -48,5 +48,3 @@ you can contact me through the following:
 Discord: Unseen#7064
 Devforum: https://devforum.roblox.com/u/voidexception
 Twitter: https://twitter.com/ExceptionVoid
-
-Hope you enjoy my plugin! Please credit me for using my code, if you are to use it, thanks! :)
