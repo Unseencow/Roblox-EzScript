@@ -1,5 +1,7 @@
 # Roblox-EzScript
 
+NOTE: Please forgive my horrible code, this was a good while ago 😐
+
 SETUP:
 
 To setup EzScript, simply download the plugin (https://www.roblox.com/library/7117602638/EzScript)
